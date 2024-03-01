@@ -18,7 +18,9 @@ This is the official documentation for the PrintLib.
 ### Error
 The module <code>PrintLib::Error</code> is the module with which you can build error messages.
 
-| Function-nane | Parmaters | Description |
+The <code>ErrorFactory</code> class
+
+| Function name | Parmaters | Description |
 |---------------|-----------|-------------|
 |<code>new</code>|ecode: <code>String</code>, msg: <code>String</code>| This is the initializer of the class. It creates a new ErrorFactory with the error-code <code>ecode</code> and the error message <code>msg</code>|
 |<code>add_code_line</code>|line: <code>String</code>, display_line_no: <code>bool</code>, line_no: <code>usize</code>, display_add: <code>bool</code>|This function adds a new  line to the error message. The parameter <code>line</code> is the code line of which the error message is specified. <code> display_lin_no</code> means if the line number (parameter <code>line_no</code> is the line number) is shown. <code>display_add</code> means if a +++ needs to be shown (it is good for showing potential fixes).
@@ -26,3 +28,16 @@ The module <code>PrintLib::Error</code> is the module with which you can build e
 |<code>add_arrow</code>|file: <code>String</code>, line: <code>usize</code>, where_start: <code>usize</code>|Add adds an arrow in the format -->{<code>file</code>}:{<code>line</code>}:{<code>where_start</code>} to the error message|
 |<code>add_arrowW</code>|file: <code>String</code>, line: <code>usize</code>, |Add adds an arrow in the format -->{<code>file</code>}:{<code>line</code>} to the error message|
 |<code>print</code>||Prints the error message
+
+### Logger
+The module <code>PrintLib::Logger</code> is the module with which you can use the logger.
+
+The <code>Logger</code> Class
+
+| Function name | Parmaters | Description |
+|---------------|-----------|-------------|
+|<code>new</code>| | Is the initializer of the class. Returns a new Instance|
+|<code>debug</code>|msg: <code>String</code>| Prints the message <code>msg</code> in level debug|
+|<code>info</code>|msg: <code>String</code>| Prints the message <code>msg</code> in level info|
+|<code>warn</code>|msg: <code>String</code>| Prints the message <code>msg</code> in level warning|
+|<code>error</code>|msg: <code>String</code>| Prints the message <code>msg</code> in level error|
