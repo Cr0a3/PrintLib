@@ -1,6 +1,8 @@
 # PrintLib
 PrintLib is a libary for rust which makes printing easy.
 
+[Github reposentory ](https://github.com/Toni-Graphics/PrintLib)
+
 ## Install
 To add PrintLib to your project, go into your project folder and execute:
 ```
@@ -11,6 +13,14 @@ Then you can import PrintLib just like other crates:
 ```
 use PrintLib::*;
 ```
+
+## Examples
+In the example folder you can see two examples:
+ - <code>error_test</code>: Test usage of the ErrorFactory
+ - <code>logger_test</code>: Test usage of the Logger
+
+Link to the examples:
+    https://github.com/Toni-Graphics/PrintLib/tree/master/examples/
 
 ## Documentation
 This is the official documentation for the PrintLib.

@@ -1,5 +1,5 @@
 [package]
-name = "logger_test"
+name = "error_test"
 version = "0.1.0"
 edition = "2021"
 
