@@ -1,8 +1,10 @@
 [package]
 name = "PrintLib"
-author = "cr0a3"
-version = "0.1.0"
+author = "Cr0a3"
+version = "1.2.0"
 edition = "2021"
+description = "The ultimative printling libary for Rust"
+license = "MIT"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
