@@ -1,5 +1,8 @@
+use colored::Colorize;
+
 pub mod Error {
     use colored::Colorize;
+
 
     pub struct ErrorFactory {
         ecode: String,
@@ -80,7 +83,35 @@ pub mod Error {
     }
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+pub mod Logger {
+    use chrono::prelude::*;
+    use colored::Colorize;
+
+    pub struct Logger {}
+
+    impl Logger {
+        pub fn new() -> Self {
+            Self {}
+        }
+
+        pub fn info(&self, msg: String) {
+            let time_string: String = Utc::now().to_string();
+            println!(" {} | {} | {}", "[INFO]".blue(), time_string.on_truecolor(148, 148, 148), msg);
+        }
+
+        pub fn debug(&self, msg: String) {
+            let time_string: String = Utc::now().to_string();
+            println!(" {} | {} | {}", "[DEBUG]".on_truecolor(148, 148, 148), time_string.on_truecolor(148, 148, 148), msg);
+        }
+
+        pub fn warn(&self, msg: String) {
+            let time_string: String = Utc::now().to_string();
+            println!(" {} | {} | {}", "[WARN!]".yellow(), time_string.on_truecolor(148, 148, 148), msg);
+        }
+
+        pub fn error(&self, msg: String) {
+            let time_string: String = Utc::now().to_string();
+            println!(" {} | {} | {}", "[ERROR!]".red(), time_string.on_truecolor(148, 148, 148), msg);
+        }
+    }
 }
