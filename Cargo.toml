@@ -1,7 +1,7 @@
 [package]
 name = "PrintLib"
 author = "Cr0a3"
-version = "1.2.0"
+version = "1.2.1"
 edition = "2021"
 description = "The ultimative printling libary for Rust"
 license = "MIT"
