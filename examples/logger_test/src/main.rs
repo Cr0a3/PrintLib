@@ -1,7 +1,7 @@
-use PrintLib::Logger::Logger;
+use PrintLib::logr;
 
 fn main() {
-    let logr: Logger = Logger::new();
+    let logr: Logger = logr::def();
     logr.debug(String::from("DEBUG TEST!"));
     logr.info(String::from("INFO TEST!"));
     logr.warn(String::from("WARN TEST!"));

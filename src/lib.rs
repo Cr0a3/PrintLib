@@ -1,6 +1,6 @@
 use colored::Colorize;
 
-pub mod Error {
+pub mod error {
     use colored::Colorize;
 
 
@@ -83,35 +83,119 @@ pub mod Error {
     }
 }
 
-pub mod Logger {
+pub mod logr {
     use chrono::prelude::*;
     use colored::Colorize;
 
-    pub struct Logger {}
+    pub struct LoggerColor {
+        pub r: u8,
+        pub g: u8,
+        pub b: u8,
+    }
+
+    pub struct LoggerConfig {
+        pub time: bool,
+        
+        pub info_string: String,
+        pub info_color: LoggerColor,
+
+        pub debug_string: String,
+        pub debug_color: LoggerColor,
+
+        pub warn_string: String,
+        pub warn_color: LoggerColor,
+
+        pub err_string: String,
+        pub err_color: LoggerColor,
+    }
+
+    pub fn def() -> Logger {
+        Logger::new( 
+            LoggerConfig {
+                time: true,
+
+                info_string:    "[INFO]  ".to_string(),
+                debug_string:   "[DEBUG] ".to_string(),
+                warn_string:    "[WARN!] ".to_string(),
+                err_string:     "[ERR!]  ".to_string(),
+
+                info_color: LoggerColor { r: 0,  g: 0,  b: 255 },
+                debug_color: LoggerColor { r: 148, g: 148, b: 148},
+                warn_color: LoggerColor { r: 0,  g: 0,  b: 255 },
+                err_color: LoggerColor { r: 0,  g: 0,  b: 255 },
+            }
+        )
+    }
+
+    pub struct Logger {
+        conf: LoggerConfig,
+    }
 
     impl Logger {
-        pub fn new() -> Self {
-            Self {}
+        pub fn new(_conf: LoggerConfig) -> Self {
+            Self {
+                conf: _conf
+            }
         }
 
         pub fn info(&self, msg: String) {
-            let time_string: String = Utc::now().to_string();
-            println!(" {}   | {} | {}", "[INFO]".blue(), time_string.truecolor(148, 148, 148), msg);
+            let mut fmt1 = format!(" {} |", self.conf.info_string.truecolor(
+                self.conf.info_color.r, 
+                self.conf.info_color.g,
+                self.conf.info_color.b,
+            ));
+            if self.conf.time {
+                fmt1 = format!(
+                    "{} | {} |", fmt1, Utc::now().to_string().truecolor(148, 148, 148)
+                );
+            }
+            
+            println!("{} | {}", fmt1, msg);
         }
 
         pub fn debug(&self, msg: String) {
-            let time_string: String = Utc::now().to_string();
-            println!(" {}  | {} | {}", "[DEBUG]".truecolor(148, 148, 148), time_string.truecolor(148, 148, 148), msg);
+            let mut fmt1 = format!(" {} |", self.conf.debug_string.truecolor(
+                self.conf.debug_color.r, 
+                self.conf.debug_color.g,
+                self.conf.debug_color.b,
+            ));
+            if self.conf.time {
+                fmt1 = format!(
+                    "{} | {} |", fmt1, Utc::now().to_string().truecolor(148, 148, 148)
+                );
+            }
+            
+            println!("{} | {}", fmt1, msg);
         }
 
         pub fn warn(&self, msg: String) {
-            let time_string: String = Utc::now().to_string();
-            println!(" {}  | {} | {}", "[WARN!]".yellow(), time_string.truecolor(148, 148, 148), msg);
+            let mut fmt1 = format!(" {} |", self.conf.warn_string.truecolor(
+                self.conf.warn_color.r, 
+                self.conf.warn_color.g,
+                self.conf.warn_color.b,
+            ));
+            if self.conf.time {
+                fmt1 = format!(
+                    "{} | {} |", fmt1, Utc::now().to_string().truecolor(148, 148, 148)
+                );
+            }
+            
+            println!("{} | {}", fmt1, msg);
         }
 
         pub fn error(&self, msg: String) {
-            let time_string: String = Utc::now().to_string();
-            println!(" {} | {} | {}", "[ERROR!]".red(), time_string.truecolor(148, 148, 148), msg);
+            let mut fmt1 = format!(" {} |", self.conf.err_string.truecolor(
+                self.conf.err_color.r, 
+                self.conf.err_color.g,
+                self.conf.err_color.b,
+            ));
+            if self.conf.time {
+                fmt1 = format!(
+                    "{} | {} |", fmt1, Utc::now().to_string().truecolor(148, 148, 148)
+                );
+            }
+            
+            println!("{} | {}", fmt1, msg);
         }
     }
 }

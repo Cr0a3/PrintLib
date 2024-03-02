@@ -1,9 +1,10 @@
 [package]
 name = "PrintLib"
 author = "Cr0a3"
-version = "1.2.2"
+version = "1.2.3"
+reposentory = "https://github.com/Toni-Graphics/PrintLib"
 edition = "2021"
-description = "The ultimative printling libary for Rust"
+description = "The ultimative printing libary for Rust"
 license = "MIT"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html

@@ -26,7 +26,7 @@ Link to the examples:
 This is the official documentation for the PrintLib.
 
 ### Error
-The module <code>PrintLib::Error</code> is the module with which you can build error messages.
+The module <code>PrintLib::error</code> is the module with which you can build error messages.
 
 The <code>ErrorFactory</code> class
 
@@ -40,14 +40,37 @@ The <code>ErrorFactory</code> class
 |<code>print</code>||Prints the error message
 
 ### Logger
-The module <code>PrintLib::Logger</code> is the module with which you can use the logger.
+The module <code>PrintLib::logr</code> is the module with which you can use the logger.
 
-The <code>Logger</code> Class
+#### The <code>Logger</code> Class
 
 | Function name | Parmaters | Description |
 |---------------|-----------|-------------|
-|<code>new</code>| | Is the initializer of the class. Returns a new Instance|
+|<code>new</code>| conf | Is the initializer of the class. The parameter <code>conf</code> is the <code>LoggerConfig</code> for the class. Returns a new Instance.|
 |<code>debug</code>|msg: <code>String</code>| Prints the message <code>msg</code> in level debug|
 |<code>info</code>|msg: <code>String</code>| Prints the message <code>msg</code> in level info|
 |<code>warn</code>|msg: <code>String</code>| Prints the message <code>msg</code> in level warning|
 |<code>error</code>|msg: <code>String</code>| Prints the message <code>msg</code> in level error|
+
+#### The <code>def</code> function
+Returns <code>Logger</code> with the default configuration
+
+#### The <code>LoggerConfig</code> struct
+| Name | Type | Description |
+|---------------|---------|-----------|
+|<code>time</code>|<code>bool</code>|If the time should be presented in logger messages|
+|<code>info_string</code>|<code>String</code>|String which indicates that the message is level info (Normal: [INFO  ])|
+|<code>debug_string</code>|<code>String</code>|String which indicates that the message is level debug (Normal: [DEBUG ])|
+|<code>warn_string</code>|<code>String</code>|String which indicates that the message is level warn (Normal: [WARN!] )|
+|<code>err_string</code>|<code>String</code>|String which indicates that the message is level error (Normal: [[ERR!]  ])|
+|<code>info_color</code>|<code>LoggerColor</code>|The color in which the level indicator ([xyz]) at level info is|
+|<code>debug_color</code>|<code>LoggerColor</code>|The color in which the level indicator ([xyz]) at level debug is|
+|<code>warn_color</code>|<code>LoggerColor</code>|The color in which the level indicator ([xyz]) at level warn is|
+|<code>err_color</code>|<code>LoggerColor</code>|The color in which the level indicator ([xyz]) at level err is|
+
+#### The <code>LoggerColor</code> struct
+| Name | Type | Description |
+|---------------|---------|-----------|
+|``r``|``u8``|The red channel|
+|``g``|``u8``|The green channel|
+|``b``|``u8``|The blue channel|
