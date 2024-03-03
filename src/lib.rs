@@ -222,9 +222,9 @@ pub mod colorize {
         fn gray(&self) -> String;
     }
 
-    impl Colorize for &str {
+    impl<'a> Colorize for &'a str {
         fn color(&self, clr: Color) -> String {
-            let rgb_str = format!("\x1b[{};{};{};0;0m", clr.r.to_string(), clr.g.to_string(), clr.b.to_string());
+            let rgb_str: String = format!("\x1b[{};{};{};0;0m", clr.r.to_string(), clr.g.to_string(), clr.b.to_string());
             format!("{rgb_str}{self}{ANSI_RESET}")
         }
 
