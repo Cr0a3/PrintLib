@@ -94,20 +94,11 @@ Returns ``Logger`` with the default configuration
 
 The module ``PrintLib::colorize`` is the module with which you can colorize your ``&str``s.
 
-#### The ``Color`` struct
-
-The color struct is the struct in which rgb color can be stored.
-| Parameter name | Type | Description |
-|----------------|------|-------------|
-|``r``|``u8``|The red color channel.|
-|``g``|``u8``|The green color channel.|
-|``b``|``u8``|The blue color channel.|
-
 #### The ``Colorize`` trait
 
 | Function name | Parameters | Return type | Description |
 |---------------|------------|-----------|------------|
-|``color``|``&self``, clr: ``Color``|``String``|Turns the colorof the string to the specified rgb-values in ``clr``|
+|``color``|``&self``, r: ``i16``, g: ``i16``, b: ``116``|``String``|Turns the colorof the string to the specified rgb-values|
 |``black``|``&self``|``String``| Makes the string black|
 |``red``|``&self``|``String``| Makes the string red|
 |``green``|``&self``|``String``| Makes the string green|
@@ -117,3 +108,31 @@ The color struct is the struct in which rgb color can be stored.
 |``cyan``|``&self``|``String``| Makes the string cyan|
 |``white``|``&self``|``String``| Makes the string white|
 |``gray``|``&self``|``String``| Makes the string gray|
+|``bold``|``&self``|``String``| Makes the string bold|
+|``italic``|``&self``|``String``| Makes the string italic|
+|``underline``|``&self``|``String``| Makes the string underline|
+|``strike``|``&self``|``String``| Makes the string strike|
+
+#### The ``Style`` struct
+
+| Name | Type | Description |
+|-----------|--------|------------|
+|``bold``|``bool``|Is the string bold|
+|``italic``|``bool``|Is the string italic|
+|``underlined``|``bool``|Is the string underlined|
+|``strike``|``bool``|Is the string striketrough|
+
+#### The ``ColoredString`` struct
+
+| Name | Type | Description |
+|-----------|--------|------------|
+|``r``|``i16``|The red color channel|
+|``g``|``i16``|The red green channel|
+|``b``|``i16``|The red blue channel|
+
+> Side note: If the red channel is -1 there will be no color, but instead a style (like bold, italic, etc.) applied to
+
+| Function name | Parameters | Return type | Description |
+|---------------|------------|-----------|------------|
+|``new``|r: ``i16``, g: ``i16``, b: ``i16``, _attr: ``Style``, _str: ``&str``|``Colored String``|Initialiser of the colored string class.|
+|``to_string``||``String``|Converts the ColoredString to a normal String|
