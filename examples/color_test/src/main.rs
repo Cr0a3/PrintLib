@@ -1,7 +1,5 @@
-use PrintLib::colorize::*;
+use PrintLib::colorize::{Color, Colorize};
 
 fn main() {
-    println!("Red".red());
-    println!("Green".green());
-    println!("Blue".blue());
+    println!("{}", "abc".blue());
 }

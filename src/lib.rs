@@ -224,7 +224,7 @@ pub mod colorize {
 
     impl<'a> Colorize for &'a str {
         fn color(&self, clr: Color) -> String {
-            let rgb_str: String = format!("\x1b[{};{};{};0;0m", clr.r.to_string(), clr.g.to_string(), clr.b.to_string());
+            let rgb_str: String = format!("\x1b[38;2;{};{};{}m", clr.r.to_string(), clr.g.to_string(), clr.b.to_string());
             format!("{rgb_str}{self}{ANSI_RESET}")
         }
 
