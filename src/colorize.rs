@@ -6,6 +6,11 @@ pub struct Style {
     pub italic: bool,
     pub underlined: bool,
     pub strike: bool,
+
+    pub bg_r: u8,
+    pub bg_g: u8,
+    pub bg_b: u8,
+    pub bg: bool,
 }
 
 pub trait Colorize {
@@ -19,6 +24,17 @@ pub trait Colorize {
     fn cyan(&self) -> String;
     fn white(&self) -> String;
     fn gray(&self) -> String;
+
+    fn bg_color(&self, r: u8, g: u8, b: u8) -> String;
+    fn bg_black(&self) -> String;
+    fn bg_red(&self) -> String;
+    fn bg_green(&self) -> String;
+    fn bg_yellow(&self) -> String;
+    fn bg_blue(&self) -> String;
+    fn bg_magenta(&self) -> String;
+    fn bg_cyan(&self) -> String;
+    fn bg_white(&self) -> String;
+    fn bg_gray(&self) -> String;
 
     fn bold(&self) -> String;
     fn italic(&self) -> String;
@@ -37,6 +53,7 @@ impl<'a> Colorize for &'a str {
                 italic: false,
                 underlined: false,
                 strike: false,
+                bg_r: 0, bg_b: 0, bg_g: 0, bg: false,
             },
             self,
         )
@@ -89,6 +106,7 @@ impl<'a> Colorize for &'a str {
                 italic: false,
                 underlined: false,
                 strike: false,
+                bg_r: 0, bg_b: 0, bg_g: 0, bg: false
             },
             self,
         )
@@ -105,6 +123,7 @@ impl<'a> Colorize for &'a str {
                 italic: true,
                 underlined: false,
                 strike: false,
+                bg_r: 0, bg_b: 0, bg_g: 0, bg: false
             },
             self,
         )
@@ -121,6 +140,7 @@ impl<'a> Colorize for &'a str {
                 italic: false,
                 underlined: true,
                 strike: false,
+                bg_r: 0, bg_b: 0, bg_g: 0, bg: false
             },
             self,
         )
@@ -137,10 +157,64 @@ impl<'a> Colorize for &'a str {
                 italic: false,
                 underlined: false,
                 strike: true,
+                bg_r: 0, bg_b: 0, bg_g: 0, bg: false
             },
             self,
         )
         .to_string()
+    }
+    
+    fn bg_color(&self, r: u8, g: u8, b: u8) -> String {
+        ColoredString::new(
+            -1,
+            -1,
+            -1,
+            Style {
+                bold: false,
+                italic: false,
+                underlined: false,
+                strike: false,
+                bg_r: r, bg_b: g, bg_g: b, bg: true
+            },
+            self,
+        )
+        .to_string()
+    }
+    
+    fn bg_white(&self) -> String {
+        self.bg_color(255, 255, 255)
+    }
+
+    fn bg_black(&self) -> String {
+        self.bg_color(1, 1, 1)
+    }
+
+    fn bg_red(&self) -> String {
+        self.bg_color(205, 49, 49)
+    }
+
+    fn bg_green(&self) -> String {
+        self.bg_color(13, 188, 121)
+    }
+
+    fn bg_yellow(&self) -> String {
+        self.bg_color(229, 229, 16)
+    }
+
+    fn bg_blue(&self) -> String {
+        self.bg_color(36, 114, 200)
+    }
+
+    fn bg_magenta(&self) -> String {
+        self.bg_color(188, 63, 188)
+    }
+
+    fn bg_cyan(&self) -> String {
+        self.bg_color(17, 168, 205)
+    }
+
+    fn bg_gray(&self) -> String {
+        self.bg_color(118, 118, 118)
     }
 }
 
@@ -155,6 +229,7 @@ impl Colorize for String {
                 italic: false,
                 underlined: false,
                 strike: false,
+                bg_r: 0, bg_b: 0, bg_g: 0, bg: false
             },
             self,
         )
@@ -207,6 +282,7 @@ impl Colorize for String {
                 italic: false,
                 underlined: false,
                 strike: false,
+                bg_r: 0, bg_b: 0, bg_g: 0, bg: false
             },
             self,
         )
@@ -223,6 +299,7 @@ impl Colorize for String {
                 italic: true,
                 underlined: false,
                 strike: false,
+                bg_r: 0, bg_b: 0, bg_g: 0, bg: false
             },
             self,
         )
@@ -239,6 +316,7 @@ impl Colorize for String {
                 italic: false,
                 underlined: true,
                 strike: false,
+                bg_r: 0, bg_b: 0, bg_g: 0, bg: false
             },
             self,
         )
@@ -255,10 +333,64 @@ impl Colorize for String {
                 italic: false,
                 underlined: false,
                 strike: true,
+                bg_r: 0, bg_b: 0, bg_g: 0, bg: false
             },
             self,
         )
         .to_string()
+    }
+
+    fn bg_color(&self, r: u8, g: u8, b: u8) -> String {
+        ColoredString::new(
+            -1,
+            -1,
+            -1,
+            Style {
+                bold: false,
+                italic: false,
+                underlined: false,
+                strike: false,
+                bg_r: r, bg_b: g, bg_g: b, bg: true
+            },
+            self,
+        )
+        .to_string()
+    }
+    
+    fn bg_white(&self) -> String {
+        self.bg_color(255, 255, 255)
+    }
+
+    fn bg_black(&self) -> String {
+        self.bg_color(1, 1, 1)
+    }
+
+    fn bg_red(&self) -> String {
+        self.bg_color(205, 49, 49)
+    }
+
+    fn bg_green(&self) -> String {
+        self.bg_color(13, 188, 121)
+    }
+
+    fn bg_yellow(&self) -> String {
+        self.bg_color(229, 229, 16)
+    }
+
+    fn bg_blue(&self) -> String {
+        self.bg_color(36, 114, 200)
+    }
+
+    fn bg_magenta(&self) -> String {
+        self.bg_color(188, 63, 188)
+    }
+
+    fn bg_cyan(&self) -> String {
+        self.bg_color(17, 168, 205)
+    }
+
+    fn bg_gray(&self) -> String {
+        self.bg_color(118, 118, 118)
     }
 }
 
@@ -287,7 +419,7 @@ impl ToString for ColoredString {
     fn to_string(&self) -> String {
         if self.r != -1 {
             let rgb_str = format!(
-                "\x1b[38;5;{};{};{}",
+                "\x1b[38;2;{};{};{}",
                 self.r.to_string(),
                 self.g.to_string(),
                 self.b.to_string()
@@ -312,6 +444,15 @@ impl ToString for ColoredString {
         }
         if style.strike {
             let rgb_str = format!("\x1b[9m");
+            return format!("{rgb_str}{}{ANSI_RESET}", self.str);
+        }
+
+        if style.bg {
+            let rgb_str = format!("\x1b[48;2;{};{};{}m",
+                self.attr.bg_r.to_string(),
+                self.attr.bg_g.to_string(),
+                self.attr.bg_b.to_string(),);
+
             return format!("{rgb_str}{}{ANSI_RESET}", self.str);
         }
 
