@@ -199,3 +199,69 @@ pub mod logr {
         }
     }
 }
+
+pub mod colorize {
+    const ANSI_RESET: &str = "\x1b[0m";
+
+    pub struct Color {
+        pub r: u8,
+        pub g: u8,
+        pub b: u8,
+    }
+
+    pub trait Colorize {
+        fn color(&self, clr: Color) -> String;
+        fn black(&self) -> String;
+        fn red(&self) -> String;
+        fn green(&self) -> String;
+        fn yellow(&self) -> String;
+        fn blue (&self) -> String;
+        fn magenta(&self) -> String;
+        fn cyan(&self) -> String;
+        fn white(&self) -> String;
+        fn gray(&self) -> String;
+    }
+
+    impl Colorize for &str {
+        fn color(&self, clr: Color) -> String {
+            let rgb_str = format!("\x1b[{};{};{};0;0m", clr.r.to_string(), clr.g.to_string(), clr.b.to_string());
+            format!("{rgb_str}{self}{ANSI_RESET}")
+        }
+
+        fn white(&self) -> String {
+            self.color(Color {r: 255, g: 255, b: 255})
+        }
+        
+        fn black(&self) -> String {
+            self.color(Color {r: 1, g: 1, b: 1})
+        }
+        
+        fn red(&self) -> String {
+            self.color(Color { r: 205, g: 49, b: 49,})
+        }
+        
+        fn green(&self) -> String {
+            self.color(Color {r: 13, g: 188, b: 121})
+        }
+        
+        fn yellow(&self) -> String {
+            self.color(Color {r: 229, g: 229, b: 16})
+        }
+
+        fn blue(&self) -> String {
+            self.color(Color {r: 36, g: 114, b: 200})
+        }
+        
+        fn magenta(&self) -> String {
+            self.color(Color {r: 188, g: 63, b: 188})
+        }
+        
+        fn cyan(&self) -> String {
+            self.color(Color {r: 17, g: 168, b: 205})
+        }
+        
+        fn gray(&self) -> String {
+            self.color(Color {r: 118,g: 118,b: 118})
+        }
+    }
+}
