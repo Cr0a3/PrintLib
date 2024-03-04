@@ -136,3 +136,28 @@ The module ``PrintLib::colorize`` is the module with which you can colorize your
 |---------------|------------|-----------|------------|
 |``new``|r: ``i16``, g: ``i16``, b: ``i16``, _attr: ``Style``, _str: ``&str``|``Colored String``|Initialiser of the colored string class.|
 |``to_string``||``String``|Converts the ColoredString to a normal String|
+
+#### The ColorEncoder
+``ColorEncoder::encode`` is the function with wich you can turn a simple string with the color names in it into an formated string.
+
+Args: ``str``:   ``&str`` or ``String``
+
+Description: Formats the given string in the correct color which are specified in the string
+
+Colors:
+| How it looks like in the string | Actual color |
+|---------------------------------|--------------|
+|``<black>``|black|
+|``<red>``|red|
+|``<blue>``|blue|
+|``<green>``|green|
+|``<yellow>``|yellow|
+|``<magenta>``|magenta|
+|``<cyan>``|cyan|
+|``<white>``|white|
+|``<gray>``|gray|
+|``<bold>``|bold|
+|``<italic>``|italic|
+|``<underline>``|underline|
+|``<strike>``|striketrough|
+|``<&hex>``|hex color|

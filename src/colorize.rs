@@ -1,3 +1,5 @@
+use std::fmt::format;
+
 
 const ANSI_RESET: &str = "\x1b[0m";
 
@@ -25,7 +27,7 @@ pub trait Colorize {
     fn white(&self) -> String;
     fn gray(&self) -> String;
 
-    fn bg_color(&self, r: u8, g: u8, b: u8) -> String;
+    /*fn bg_color(&self, r: u8, g: u8, b: u8) -> String;
     fn bg_black(&self) -> String;
     fn bg_red(&self) -> String;
     fn bg_green(&self) -> String;
@@ -34,7 +36,7 @@ pub trait Colorize {
     fn bg_magenta(&self) -> String;
     fn bg_cyan(&self) -> String;
     fn bg_white(&self) -> String;
-    fn bg_gray(&self) -> String;
+    fn bg_gray(&self) -> String;*/
 
     fn bold(&self) -> String;
     fn italic(&self) -> String;
@@ -164,7 +166,7 @@ impl<'a> Colorize for &'a str {
         .to_string()
     }
     
-    fn bg_color(&self, r: u8, g: u8, b: u8) -> String {
+    /*fn bg_color(&self, r: u8, g: u8, b: u8) -> String {
         ColoredString::new(
             -1,
             -1,
@@ -215,7 +217,7 @@ impl<'a> Colorize for &'a str {
 
     fn bg_gray(&self) -> String {
         self.bg_color(118, 118, 118)
-    }
+    }*/
 }
 
 impl Colorize for String {
@@ -340,7 +342,7 @@ impl Colorize for String {
         .to_string()
     }
 
-    fn bg_color(&self, r: u8, g: u8, b: u8) -> String {
+    /*fn bg_color(&self, r: u8, g: u8, b: u8) -> String {
         ColoredString::new(
             -1,
             -1,
@@ -391,7 +393,7 @@ impl Colorize for String {
 
     fn bg_gray(&self) -> String {
         self.bg_color(118, 118, 118)
-    }
+    }*/
 }
 
 pub struct ColoredString {
@@ -447,15 +449,84 @@ impl ToString for ColoredString {
             return format!("{rgb_str}{}{ANSI_RESET}", self.str);
         }
 
-        if style.bg {
+        /*if style.bg {
             let rgb_str = format!("\x1b[48;2;{};{};{}m",
                 self.attr.bg_r.to_string(),
                 self.attr.bg_g.to_string(),
                 self.attr.bg_b.to_string(),);
 
             return format!("{rgb_str}{}{ANSI_RESET}", self.str);
-        }
+        }*/
 
         String::new()
     }
 }
+
+pub struct ColorEncoder {}
+
+impl ColorEncoder {
+    pub fn encode(string: &str) -> String {
+        let mut str: String = string.clone().into();
+
+        str = str.replace("<black>", &"".black());
+        str = str.replace("<red>", &"".red());
+        str = str.replace("<blue>", &"".blue());
+        str = str.replace("<green>", &"".green());
+        str = str.replace("<yellow>", &"".yellow());
+        str = str.replace("<magenta>", &"".magenta());
+        str = str.replace("<cyan>", &"".cyan());
+        str = str.replace("<white>", &"".white());
+        str = str.replace("<gray>", &"".gray());
+        str = str.replace("<bold>", &"".bold());
+        str = str.replace("<italic>", &"".italic());
+        str = str.replace("<underline>", &"".underline());
+        str = str.replace("<strike>", &"".strike());
+        str = str.replace(ANSI_RESET, "");
+
+        let chars = str.chars();
+        let mut l_c: char = '\0';
+        let mut clr_b: bool = false;
+        let mut clr_str: String = String::new();
+
+        for c in chars {
+            if c == '>' && clr_b {
+                clr_b = false;
+                break;
+            }
+
+            if clr_b {
+                clr_str += &String::from(c);
+            }
+
+            if c == '&' && l_c == '<' {
+                clr_b = true;
+            }
+
+            l_c = c;
+        }
+        let mut _r: i16 = -1; let mut _g: i16 = -1; let mut _b: i16 = -1;
+
+        let str_len = clr_str.chars().count();
+
+        if str_len == 6 {
+            let r = i16::from_str_radix(&clr_str[0..2], 16).ok();
+            let g = i16::from_str_radix(&clr_str[2..4], 16).ok();
+            let b = i16::from_str_radix(&clr_str[4..6], 16).ok();
+
+            if !r.is_none() { _r = r.unwrap(); } else {
+                println!("{} {}", "Error: ".red(), "red color channel in encoded color string is null"); }
+            if !r.is_none() { _g = g.unwrap(); } else {
+                println!("{} {}", "Error: ".red(), "green color channel in encoded color string is null"); }
+            if !r.is_none() { _b = b.unwrap(); } else {
+                println!("{} {}", "Error: ".red(), "blue color channel in encoded color string is null"); }
+
+            if _r != -1 && _g != -1 && _b != -1 {
+                str = str.replace(
+                    &format!("<&{}>", clr_str),
+                        &"".color(_r, _g, _b).replace(ANSI_RESET, ""));
+            }
+        }
+
+        str + ANSI_RESET
+    }
+} 
