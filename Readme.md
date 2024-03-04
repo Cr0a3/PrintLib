@@ -23,11 +23,6 @@ use PrintLib::*;
 
 ## Examples
 
-In the example folder you can see two examples:
-
-- ``error_test``: Test usage of the ErrorFactory
-- ``logger_test``: Test usage of the Logger
-
 Link to the examples:
     <https://github.com/Toni-Graphics/PrintLib/tree/master/examples/>
 
