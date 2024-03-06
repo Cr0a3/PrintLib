@@ -42,7 +42,7 @@ The ``ErrorFactory`` class
 |``add_code_line``|line: ``String``, display_line_no: ``bool``, line_no: ``usize``, display_add: ``bool``|This function adds a new  line to the error message. The parameter ``line`` is the code line of which the error message is specified. ``display_lin_no`` means if the line number (parameter ``line_no`` is the line number) is shown. ``display_add`` means if a +++ needs to be shown (it is good for showing potential fixes).|
 |``add_where</code|where_start: ``usize``, where_length: ``usize``, where_msg_b: ``bool``, where_msg: ``String``|This function adds an string to the error message to show where the error is. ``where_start`` means where the showing should start (e.g. where_start = 3 means it starts after the 3rd character). ``where_length`` means how long the showing should be. ``where_msg_b``: when true it showes a string to the right of the showing. When false it shows just the showing. ``where_msg`` is the msg right to the showing (if ``where_msg_b`` is true)|
 |``add_arrow``|file: ``String``, line: ``usize``, where_start: ``usize``|Add adds an arrow in the format -->{``file``}:{``line``}:{``where_start``} to the error message|
-|``add_arrowW``|file: ``String``, line: ``usize``, |Add adds an arrow in the format -->{``file``}:{``line``} to the error message|
+|``add_arrow_w``|file: ``String``, line: ``usize``, |Add adds an arrow in the format -->{``file``}:{``line``} to the error message|
 |``print``||Prints the error message|
 
 ### Logger
@@ -156,3 +156,13 @@ Colors:
 |``<underline>``|underline|
 |``<strike>``|striketrough|
 |``<&hex>``|hex color|
+
+### Emojis
+The module ``PrintLib::emoji`` is the module with which you can make printing emojis easyer.
+
+#### The class ``EmojiMaker``
+| Function name | Parameters | Return type | Description |
+|---------------|------------|-----------|------------|
+|``new``||``EmojiMaker``|Creates a new EmojiMaker|
+|``add``|name: ``&str``, emoji: ``&str``||Adds an new emoji with the name ``name``|
+|``get``|name: ``str``|``String``|Gets the emoji with the name ``name`` from the intern hashmap|

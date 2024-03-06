@@ -67,7 +67,7 @@ impl ErrorFactory {
         self.fmt_lines.push(arrow);
     }
 
-    pub fn add_arrowW(&mut self, file: String, line: usize) {
+    pub fn add_arrow_w(&mut self, file: String, line: usize) {
         let arrow = format!("  -->{}:{}", file, line);
 
         self.fmt_lines.push(arrow);

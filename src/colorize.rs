@@ -1,6 +1,3 @@
-use std::fmt::format;
-
-
 const ANSI_RESET: &str = "\x1b[0m";
 
 pub struct Style {
@@ -466,7 +463,7 @@ pub struct ColorEncoder {}
 
 impl ColorEncoder {
     pub fn encode(string: &str) -> String {
-        let mut str: String = string.clone().into();
+        let mut str: String = string.into();
 
         str = str.replace("<black>", &"".black());
         str = str.replace("<red>", &"".red());
