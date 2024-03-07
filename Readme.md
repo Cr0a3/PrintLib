@@ -2,9 +2,8 @@
 
 PrintLib is a libary for rust which makes printing easy.
 
-
 > This document is and (works) only for the newest ``PrintLib`` version
-> 
+
 [Github reposentory](https://github.com/Toni-Graphics/PrintLib)
 
 ## Install
@@ -133,6 +132,7 @@ The module ``PrintLib::colorize`` is the module with which you can colorize your
 |``to_string``||``String``|Converts the ColoredString to a normal String|
 
 #### The ColorEncoder
+
 ``ColorEncoder::encode`` is the function with wich you can turn a simple string with the color names in it into an formated string.
 
 Args: ``str``:   ``&str`` or ``String``
@@ -158,11 +158,26 @@ Colors:
 |``<&hex>``|hex color|
 
 ### Emojis
+
 The module ``PrintLib::emoji`` is the module with which you can make printing emojis easyer.
 
 #### The class ``EmojiMaker``
+
 | Function name | Parameters | Return type | Description |
 |---------------|------------|-----------|------------|
 |``new``||``EmojiMaker``|Creates a new EmojiMaker|
 |``add``|name: ``&str``, emoji: ``&str``||Adds an new emoji with the name ``name``|
 |``get``|name: ``str``|``String``|Gets the emoji with the name ``name`` from the intern hashmap|
+
+### Arg
+
+The module ``PrintLib::arg`` is the module with which makes evrything releated to args easyer.
+
+#### The class ``UsageFactory``
+
+| Function name | Parameters | Return type | Description |
+|---------------|------------|-----------|------------|
+|``new``|name: ``&str``, app_name: ``&str``|``UsageFactory``|Creates a new UsageFactory. ``name`` is the name of your product/application. ``app_name`` is how you would run your programm (e.g for Cargo it would be ``cargo``).|
+|``add_cmd``|``&mut self``, name: ``&str``, description: ``&str``||Adds a new command with the name name and description description|
+|``add_opt``|``&mut self``, name: ``&str``, description: ``&str``||Adds a new option with the name name and description description|
+|``print``|``&mut self``||Prints the usage|
