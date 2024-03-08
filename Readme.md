@@ -106,6 +106,16 @@ The module ``PrintLib::colorize`` is the module with which you can colorize your
 |``italic``|``&self``|``String``| Makes the string italic|
 |``underline``|``&self``|``String``| Makes the string underline|
 |``strike``|``&self``|``String``| Makes the string strike|
+|``bg_black``|``&self``|``String``| Makes the bg of the string black|
+|``bg_red``|``&self``|``String``| Makes the bg of the string red|
+|``bg_green``|``&self``|``String``| Makes the bg of the string green|
+|``bg_yellow``|``&self``|``String``| Makes the bg of the string yellow|
+|``bg_blue``|``&self``|``String``| Makes the bg of the string blue|
+|``bg_magenta``|``&self``|``String``| Makes the bg of the string magenta|
+|``bg_cyan``|``&self``|``String``| Makes the bg of the string cyan|
+|``bg_white``|``&self``|``String``| Makes the bg of the string white|
+|``bg_gray``|``&self``|``String``| Makes the bg of the string gray|
+|``bg_bold``|``&self``|``String``| Makes the bg of the string bold|
 
 #### The ``Style`` struct
 
@@ -181,3 +191,9 @@ The module ``PrintLib::arg`` is the module with which makes evrything releated t
 |``add_cmd``|``&mut self``, name: ``&str``, description: ``&str``||Adds a new command with the name name and description description|
 |``add_opt``|``&mut self``, name: ``&str``, description: ``&str``||Adds a new option with the name name and description description|
 |``print``|``&mut self``||Prints the usage|
+
+## Errors
+
+Known:
+
+> When bg is changed color do not work proberly

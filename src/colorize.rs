@@ -24,7 +24,7 @@ pub trait Colorize {
     fn white(&self) -> String;
     fn gray(&self) -> String;
 
-    /*fn bg_color(&self, r: u8, g: u8, b: u8) -> String;
+    fn bg_color(&self, r: u8, g: u8, b: u8) -> String;
     fn bg_black(&self) -> String;
     fn bg_red(&self) -> String;
     fn bg_green(&self) -> String;
@@ -33,7 +33,7 @@ pub trait Colorize {
     fn bg_magenta(&self) -> String;
     fn bg_cyan(&self) -> String;
     fn bg_white(&self) -> String;
-    fn bg_gray(&self) -> String;*/
+    fn bg_gray(&self) -> String;
 
     fn bold(&self) -> String;
     fn italic(&self) -> String;
@@ -163,7 +163,7 @@ impl<'a> Colorize for &'a str {
         .to_string()
     }
     
-    /*fn bg_color(&self, r: u8, g: u8, b: u8) -> String {
+    fn bg_color(&self, r: u8, g: u8, b: u8) -> String {
         ColoredString::new(
             -1,
             -1,
@@ -193,7 +193,7 @@ impl<'a> Colorize for &'a str {
     }
 
     fn bg_green(&self) -> String {
-        self.bg_color(13, 188, 121)
+        self.bg_color(36, 114, 200)
     }
 
     fn bg_yellow(&self) -> String {
@@ -201,7 +201,7 @@ impl<'a> Colorize for &'a str {
     }
 
     fn bg_blue(&self) -> String {
-        self.bg_color(36, 114, 200)
+        self.bg_color(13, 188, 121)
     }
 
     fn bg_magenta(&self) -> String {
@@ -214,7 +214,7 @@ impl<'a> Colorize for &'a str {
 
     fn bg_gray(&self) -> String {
         self.bg_color(118, 118, 118)
-    }*/
+    }
 }
 
 impl Colorize for String {
@@ -339,7 +339,7 @@ impl Colorize for String {
         .to_string()
     }
 
-    /*fn bg_color(&self, r: u8, g: u8, b: u8) -> String {
+    fn bg_color(&self, r: u8, g: u8, b: u8) -> String {
         ColoredString::new(
             -1,
             -1,
@@ -390,7 +390,7 @@ impl Colorize for String {
 
     fn bg_gray(&self) -> String {
         self.bg_color(118, 118, 118)
-    }*/
+    }
 }
 
 pub struct ColoredString {
@@ -446,14 +446,14 @@ impl ToString for ColoredString {
             return format!("{rgb_str}{}{ANSI_RESET}", self.str);
         }
 
-        /*if style.bg {
-            let rgb_str = format!("\x1b[48;2;{};{};{}m",
+        if style.bg {
+            let rgb_str = format!("\x1b[48;2;{};{};{}",
                 self.attr.bg_r.to_string(),
                 self.attr.bg_g.to_string(),
                 self.attr.bg_b.to_string(),);
 
-            return format!("{rgb_str}{}{ANSI_RESET}", self.str);
-        }*/
+            return format!("{rgb_str}m{}{ANSI_RESET}", self.str);
+        }
 
         String::new()
     }
