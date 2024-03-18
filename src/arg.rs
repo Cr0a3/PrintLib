@@ -1,4 +1,4 @@
-use std::{cmp::max, vec};
+use std::vec;
 use crate::colorize::Colorize;
 
 pub struct UsageFactory {
